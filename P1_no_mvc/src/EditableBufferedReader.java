@@ -99,10 +99,6 @@ public class EditableBufferedReader extends BufferedReader {
         this.setRaw();
 
         int num = this.read();
-        //int i = 0, j = 0;	// Cursor en la línea
-        //int length = 0;
-        //char[] str = new char[100];
-        //String final;
         Line linea = new Line();
         
         while (num != 13) { 			// Enter
