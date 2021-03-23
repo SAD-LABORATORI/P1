@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Line extends Observable {
 
-    public static final int TERMINAL = 80;
+    public int TERMINAL;
 
     StringBuffer buffer;
     public int [][] posicions={{0,0},{0,0},{0,0}};
@@ -14,6 +14,8 @@ public class Line extends Observable {
 
     public Line() {
         buffer = new StringBuffer(1000);
+        TERMINAL=this.getTermlength();
+        
     }
 
     public int getLength() {
@@ -148,10 +150,11 @@ public class Line extends Observable {
     public boolean getState() {
         return this.state;
     }
-    /*public int getTermlength() throws IOException{
-        Runtime.getRuntime().exec("stty size");
-        String s=this.readLine();
-        System.out.println(s);
-        return 1;
-    }*/
+    public int getTermlength() throws IOException{
+        Process process = Runtime.getRuntime().exec("tput cols");
+        InputStream is = process.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String cols = reader.readLine();
+        return Integer.parseInt(cols);
+    }
 }
